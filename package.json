@@ -1,0 +1,22 @@
+{
+  "name": "esys_chatbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bappurii/esys_chatbot.git"
+  },
+  "author": "Puri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bappurii/esys_chatbot/issues"
+  },
+  "homepage": "https://github.com/bappurii/esys_chatbot#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
