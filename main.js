@@ -1,14 +1,48 @@
 const express = require('express');
 const app = express();
-
+const logger = require('morgan');
+app.use(logger('dev', {}));
 app.use(express.json()); 
 app.use(express.urlencoded( {extended : false } ));
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
+
+const axios = require("axios");
+const cheerio = require("cheerio");
+const log = console.log;
+
+
+//crawling
+const getHtml = async () => {
+    try {
+        return await axios.get("http://ese.cau.ac.kr/wordpress/?cat=11");
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+getHtml()
+    .then(html => {
+        let ulList = [];
+        const $ = cheerio.load(html.data);
+        const $bodyList = $("div.row div.row.blog-list").children("article");
+
+        $bodyList.each(function(i, elem) {
+            ulList[i] = {
+                title: $(this).find('div.blog-top a.blog-title').text().slice(21),
+                url: $(this).find('div.blog-top a').attr('href'),
+                summary: $(this).find('div.blog-content').text().slice(21),
+                date: $(this).find('div.blog-details span').text()
+            };
+    });
+
+    const data = ulList.filter(n => n.title);
+    return data;
 })
-app.listen(3000);
-// app.post('/message', (req, res) => {
+.then(res => log(res));
+
+
+
+// app.get('/message', (req, res) => {
 //     const question = req.body.userRequest.utterance;
 //     let data={
 
@@ -23,3 +57,4 @@ app.listen(3000);
 //     res.json(data);
 
 // });
+app.listen(3000);
