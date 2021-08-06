@@ -28,9 +28,9 @@ getHtml()
 
         $bodyList.each(function(i, elem) {
             ulList[i] = {
-                title: $(this).find('div.blog-top a.blog-title').text().slice(21).replace(/\s\s+/g, ' '),
+                title: $(this).find('div.blog-top a.blog-title').text().trim(),
                 url: $(this).find('div.blog-top a').attr('href'),
-                summary: $(this).find('div.blog-content').text().slice(21).replace('\n','').replace(/\s\s+/g, ' '),
+                summary: $(this).find('div.blog-content').text().trim(),
                 date: $(this).find('div.blog-details span').text()
             };
     });
