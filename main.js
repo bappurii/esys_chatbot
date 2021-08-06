@@ -1,3 +1,5 @@
+//Module
+//express module
 const express = require('express');
 const app = express();
 const logger = require('morgan');
@@ -5,20 +7,31 @@ app.use(logger('dev', {}));
 app.use(express.json()); 
 app.use(express.urlencoded( {extended : false } ));
 
-
+//crawling module
 const axios = require("axios");
 const cheerio = require("cheerio");
 const log = console.log;
+const url = require('url');
+
+//mySQL
+const mysql = require('mysql');
+const cn = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    password : '4321',
+    database : 'esys_mailer'
+});
 
 
 //crawling
 const getHtml = async () => {
     try {
-        return await axios.get("http://ese.cau.ac.kr/wordpress/?cat=11");
+        return await axios.get("http://ese.cau.ac.kr/wordpress/?page_id=226");
     } catch (error) {
         console.error(error);
     }
 };
+
 
 getHtml()
     .then(html => {
@@ -31,30 +44,18 @@ getHtml()
                 title: $(this).find('div.blog-top a.blog-title').text().trim(),
                 url: $(this).find('div.blog-top a').attr('href'),
                 summary: $(this).find('div.blog-content').text().trim(),
-                date: $(this).find('div.blog-details span').text()
+                date: $(this).find('div.blog-details span').text().substr(0, $(this).find('div.blog-details span').text().length-10),
+                id: url.parse($(this).find('div.blog-top a').attr('href')).query.slice(2),
             };
     });
 
     const data = ulList.filter(n => n.title);
     return data;
 })
-.then(result => log(result));
+.then(result => {
+    log(result)
+});
 
 
 
-// app.get('/message', (req, res) => {
-//     const question = req.body.userRequest.utterance;
-//     let data={
-
-//         'type' : 'buttons',
-
-//         'buttons' : ['도움말','장학금','현장실습']
-
-//     };
-
-//     // json 형식으로 응답
-
-//     res.json(data);
-
-// });
 app.listen(3000);
