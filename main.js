@@ -6,6 +6,9 @@ const logger = require('morgan');
 app.use(logger('dev', {}));
 app.use(express.json()); 
 app.use(express.urlencoded( {extended : false } ));
+const PORT = process.env.PORT
+
+
 
 //crawling module
 const axios = require("axios");
@@ -40,22 +43,29 @@ getHtml()
         const $bodyList = $("div.row div.row.blog-list").children("article");
 
         $bodyList.each(function(i, elem) {
+            let date = $(this).find('div.blog-details span').text().substr(0, $(this).find('div.blog-details span').text().length-10);
+            date = new Date(date);
+
             ulList[i] = {
                 title: $(this).find('div.blog-top a.blog-title').text().trim(),
                 url: $(this).find('div.blog-top a').attr('href'),
                 summary: $(this).find('div.blog-content').text().trim(),
-                date: $(this).find('div.blog-details span').text().substr(0, $(this).find('div.blog-details span').text().length-10),
+                "date": date,
                 id: url.parse($(this).find('div.blog-top a').attr('href')).query.slice(2),
             };
     });
-
-    const data = ulList.filter(n => n.title);
-    return data;
+    let wk_ago= new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const liData = ulList.filter(n => n.date>wk_ago);
+    return liData;
 })
 .then(result => {
     log(result)
+    app.get('/',(req,res)=>{
+        res.send(result)
+    })
 });
 
 
 
-app.listen(3000);
+
+app.listen(PORT);
