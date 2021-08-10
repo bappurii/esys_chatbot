@@ -54,8 +54,10 @@ getHtml()
                 id: url.parse($(this).find('div.blog-top a').attr('href')).query.slice(2),
             };
     });
-    let wk_ago= new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-    const liData = ulList.filter(n => n.date>wk_ago);
+    let wk_ago= new Date(Date.now() - 8 * 24 * 60 * 60 * 1000);
+    console.log(wk_ago);
+    const liData = ulList.filter(n => n.date>=wk_ago);
+    console.log(liData);
     return liData;
 })
 .then(result => {
@@ -64,8 +66,5 @@ getHtml()
         res.send(result)
     })
 });
-
-
-
 
 app.listen(PORT);
