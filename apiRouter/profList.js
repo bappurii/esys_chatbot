@@ -18,7 +18,7 @@ const cn = mysql.createConnection({
 
 
 router.post('/machine',(req,res)=>{
-    cn.query(`select * from prof`,(err, result)=>{
+    cn.query(`select * from prof where depart="기계"`,(err, result)=>{
         if(err) console.log(err);
         let arr = [];
         for(let i=0; i<result.length; i++){
