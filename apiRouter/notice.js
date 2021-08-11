@@ -38,7 +38,7 @@ getHtml()
 
             ulList[i] = {
                 "title": $(this).find('div.blog-top a.blog-title').text().trim(),
-                "description": $(this).find('div.blog-content').text().trim()+"<br>"+date,
+                "description": $(this).find('div.blog-content').text().trim()+"\\n"+date,
                 "link": {"web": $(this).find('div.blog-top a').attr('href')},
                 "date": compare_date,
             };
