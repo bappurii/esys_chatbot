@@ -278,7 +278,6 @@ router.post('/nuclear',(req, res)=>{
                         "action":  "webLink",
                         "label": "구경하기",
                         "webLinkUrl": "http://ese.cau.ac.kr/wordpress/?page_id=344"
-                        "
                         }
                     ]
                     },
