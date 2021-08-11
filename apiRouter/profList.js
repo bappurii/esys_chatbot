@@ -27,19 +27,19 @@ router.post('/기계',(req,res)=>{
                 "description": result[i].depart,
                 "thumbnail":{
                     "imageUrl": result[i].image
-                },
-                "buttons": [
-                    {
-                        "action":  "webLink",
-                        "label": "자세한 프로필 링크",
-                        "webLinkUrl": result[i].profile
-                    },
-                    {
-                        "action":  "webLink",
-                        "label": "연구실 링크",
-                        "webLinkUrl": result[i].lab
-                    }
-                ]
+                }//,
+                // "buttons": [
+                //     {
+                //         "action":  "webLink",
+                //         "label": "자세한 프로필 링크",
+                //         "webLinkUrl": result[i].profile
+                //     },
+                //     {
+                //         "action":  "webLink",
+                //         "label": "연구실 링크",
+                //         "webLinkUrl": result[i].lab
+                //     }
+                // ]
             }
         }
         const responseBody = {
