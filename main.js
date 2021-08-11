@@ -1,5 +1,6 @@
 //Module
 const notice = require('./apiRouter/notice');
+const profList= require('./apiRouter/profList');
 
 //express module
 const express = require('express');
@@ -15,7 +16,6 @@ const PORT = process.env.PORT
 //crawling module
 const axios = require("axios");
 const cheerio = require("cheerio");
-const log = console.log;
 const url = require('url');
 
 //mySQL
@@ -29,6 +29,6 @@ const cn = mysql.createConnection({
 
 
 app.use('/notice', notice);
-
+app.use('/profList', profList);
 
 app.listen(PORT);

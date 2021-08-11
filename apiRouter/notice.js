@@ -12,7 +12,6 @@ app.use(express.urlencoded( {extended : false } ));
 //crawling module
 const axios = require("axios");
 const cheerio = require("cheerio");
-const log = console.log;
 const url = require('url');
 
 //crawling
@@ -35,10 +34,9 @@ getHtml()
         $bodyList.each(function(i, elem) {
             let date = $(this).find('div.blog-details span').text().substr(0, $(this).find('div.blog-details span').text().length-10);
             compare_date = new Date(date);
-
             ulList[i] = {
-                "title": $(this).find('div.blog-top a.blog-title').text().trim()+`(${date})`,
-                "description": $(this).find('div.blog-content').text().trim(),
+                "title": $(this).find('div.blog-top a.blog-title').text().trim(),
+                "description": $(this).find('div.blog-content').text().trim()+` ${date.slice(0,-4)}`,
                 "link": {"web": $(this).find('div.blog-top a').attr('href')},
                 "date": compare_date,
             };
@@ -49,7 +47,6 @@ getHtml()
 })
 .then(liData => {
     const filtered = liData.map(({date, ...rest})=>({...rest}))
-    console.log(filtered);
     router.post('/',(req,res)=>{
 
         
