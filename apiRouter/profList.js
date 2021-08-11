@@ -21,7 +21,7 @@ router.post('/machine',(req,res)=>{
     cn.query(`select * from prof where id=1`,(err, result)=>{
         if(err) console.log(err);
         let arr = [];
-        arr[i]={
+        arr[0]={
                     "title": result[0].name,
                     "description": result[0].lecture,
                     "thumbnail":{
@@ -61,7 +61,7 @@ router.post('/machine',(req,res)=>{
         //         ]
         //     }
         // }
-        console.log(arr);
+        
         const responseBody = {
             "version": "2.0",
             "template": {
@@ -75,7 +75,7 @@ router.post('/machine',(req,res)=>{
                 ]
             }
         }
-        console.log(responseBody);
+        
         res.status(200).send(responseBody);
     })
 
