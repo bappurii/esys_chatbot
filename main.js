@@ -1,6 +1,6 @@
 //Module
 const notice = require('./apiRouter/notice');
-const errRouter = require('./apiRouter/errRouter')
+// const errRouter = require('./apiRouter/errRouter')
 // const profList = require('./apiRouter/profList')
 
 
@@ -33,6 +33,6 @@ const cn = mysql.createConnection({
 
 app.use('/notice', notice);
 // app.use('/profList', profList);
-app.use('/errorRouter', errRouter);
+// app.use('/errorRouter', errRouter);
 
 app.listen(PORT);
