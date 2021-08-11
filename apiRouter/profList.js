@@ -17,7 +17,7 @@ const cn = mysql.createConnection({
 });
 
 
-router.post('/machine',(req,res)=>{
+// router.post('/machine',(req,res)=>{
     cn.query(`select * from prof where id=1`,(err, result)=>{
         if(err) console.log(err);
         // let arr = [];
@@ -77,7 +77,26 @@ router.post('/machine',(req,res)=>{
         // }
         
         // res.status(200).send(responseBody);
-
+        
+        let obj={
+                "title": result[0].name,
+                "description": result[0].lecture,
+                "thumbnail": {
+                "imageUrl": result[0].image
+                },
+                "buttons": [
+                {
+                    "action": "webLink",
+                    "label": "profile",
+                    "messageText": result[0].profile
+                },
+                {
+                    "action":  "webLink",
+                    "label": "lab",
+                    "webLinkUrl": result[0].lab
+                }
+                ]
+            }
         const responseBody={
             "version": "2.0",
             "template": {
@@ -86,25 +105,7 @@ router.post('/machine',(req,res)=>{
                     "carousel": {
                         "type": "basicCard",
                         "items": [
-                        // {
-                        //     "title": result[0].name,
-                        //     "description": result[0].lecture,
-                        //     "thumbnail": {
-                        //     "imageUrl": result[0].image
-                        //     },
-                        //     "buttons": [
-                        //     {
-                        //         "action": "webLink",
-                        //         "label": "profile",
-                        //         "messageText": result[0].profile
-                        //     },
-                        //     {
-                        //         "action":  "webLink",
-                        //         "label": "lab",
-                        //         "webLinkUrl": result[0].lab
-                        //     }
-                        //     ]
-                        // },
+                        obj,
                         {
                             "title": "보물상자2",
                             "description": "보물상자2 안에는 뭐가 있을까",
@@ -149,12 +150,12 @@ router.post('/machine',(req,res)=>{
                 ]
                 }
             }
-            res.status(200).send(responseBody);
+            // res.status(200).send(responseBody);
 
     })
 
     
-})
+// })
 
 
 
