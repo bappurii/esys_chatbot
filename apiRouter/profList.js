@@ -24,7 +24,7 @@ router.post('/machine',(req,res)=>{
     //     for(let i=0; i<result.length; i++){
     //         arr[i]={
     //             "title": result[i].name,
-    //             "description": result[i].depart,
+    //             "description": result[i].lecture,
     //             "thumbnail":{
     //                 "imageUrl": result[i].image
     //             },
@@ -58,6 +58,7 @@ router.post('/machine',(req,res)=>{
     //     }
     //     res.status(200).send(responseBody);
     // })
+
     const responseBody={
         "version": "2.0",
         "template": {
@@ -70,7 +71,7 @@ router.post('/machine',(req,res)=>{
                         "title": "보물상자",
                         "description": "보물상자 안에는 뭐가 있을까",
                         "thumbnail": {
-                        "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg"
+                        "imageUrl": "http://ese.cau.ac.kr/wordpress/wp-content/uploads/2015/08/faculty-kimms.jpg"
                         },
                         "buttons": [
                         {
@@ -81,7 +82,7 @@ router.post('/machine',(req,res)=>{
                         {
                             "action":  "webLink",
                             "label": "구경하기",
-                            "webLinkUrl": "https://e.kakao.com/t/hello-ryan"
+                            "webLinkUrl": " https://www.ecsl.cau.ac.kr/"
                         }
                         ]
                     },
