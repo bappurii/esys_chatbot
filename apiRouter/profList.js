@@ -17,7 +17,7 @@ const cn = mysql.createConnection({
 });
 
 
-// router.post('/machine',(req,res)=>{
+router.post('/machine',(req,res)=>{
     cn.query(`select * from prof where id=1`,(err, result)=>{
         if(err) console.log(err);
         // let arr = [];
@@ -84,18 +84,18 @@ const cn = mysql.createConnection({
                 "thumbnail": {
                 "imageUrl": result[0].image
                 },
-                // "buttons": [
-                // {
-                //     "action": "webLink",
-                //     "label": "profile",
-                //     "messageText": result[0].profile
-                // },
-                // {
-                //     "action":  "webLink",
-                //     "label": "lab",
-                //     "webLinkUrl": result[0].lab
-                // }
-                // ]
+                "buttons": [
+                {
+                    "action": "webLink",
+                    "label": "profile",
+                    "messageText": result[0].profile
+                },
+                {
+                    "action":  "webLink",
+                    "label": "lab",
+                    "webLinkUrl": result[0].lab
+                }
+                ]
             }
         const responseBody={
             "version": "2.0",
@@ -105,7 +105,7 @@ const cn = mysql.createConnection({
                     "carousel": {
                         "type": "basicCard",
                         "items": [
-                        obj,
+                        // obj,
                         {
                             "title": "보물상자2",
                             "description": "보물상자2 안에는 뭐가 있을까",
@@ -150,12 +150,12 @@ const cn = mysql.createConnection({
                 ]
                 }
             }
-            // res.status(200).send(responseBody);
+            res.status(200).send(responseBody);
 
     })
 
     
-// })
+})
 
 
 

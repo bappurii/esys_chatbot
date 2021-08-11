@@ -36,7 +36,7 @@ getHtml()
             compare_date = new Date(date);
             ulList[i] = {
                 "title": $(this).find('div.blog-top a.blog-title').text().trim(),
-                "description": $(this).find('div.blog-content').text().trim()+` ${date.slice(0,-4)}`,
+                "description": $(this).find('div.blog-content').text().trim()+` ${date.slice(0,-6)}`,
                 "link": {"web": $(this).find('div.blog-top a').attr('href')},
                 "date": compare_date,
             };
