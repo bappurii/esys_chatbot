@@ -34,14 +34,13 @@ getHtml()
 
         $bodyList.each(function(i, elem) {
             let date = $(this).find('div.blog-details span').text().substr(0, $(this).find('div.blog-details span').text().length-10);
-            date = new Date(date);
+            compare_date = new Date(date);
 
             ulList[i] = {
                 "title": $(this).find('div.blog-top a.blog-title').text().trim(),
-                "description": $(this).find('div.blog-content').text().trim()+"\\n"+date,
+                "description": $(this).find('div.blog-content').text().trim()+"\r"+date,
                 "link": {"web": $(this).find('div.blog-top a').attr('href')},
-                "date": date,
-                // id: url.parse($(this).find('div.blog-top a').attr('href')).query.slice(2),
+                "date": compare_date,
             };
     });
     let wk_ago= new Date(Date.now() - 10 * 24 * 60 * 60 * 1000);
@@ -68,7 +67,7 @@ getHtml()
                         ,
                         "buttons": [
                             {
-                            "label": "전체 글 보기",
+                            "label": "전체 글 보기 링크",
                             "action": "webLink",
                             "webLinkUrl": "http://ese.cau.ac.kr/wordpress/?page_id=226"
                             }
@@ -81,41 +80,6 @@ getHtml()
     
         res.status(200).send(responseBody);
     })
-});
-
-router.post('/sayHello', function(req, res) {
-    const responseBody = {
-        version: "2.0",
-        template: {
-        outputs: [
-            {
-            
-            }
-        ]
-        }
-    };
-    
-    res.status(200).send(responseBody);
-    });
-
-router.post('/showHello', function(req, res) {
-    console.log(req.body);
-
-    const responseBody = {
-        version: "2.0",
-        template: {
-        outputs: [
-            {
-            simpleImage: {
-                imageUrl: "https://t1.daumcdn.net/friends/prod/category/M001_friends_ryan2.jpg",
-                altText: "hello I'm Ryan"
-            }
-            }
-        ]
-        }
-    };
-
-    res.status(200).send(responseBody);
 });
 
 
