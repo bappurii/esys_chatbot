@@ -38,9 +38,13 @@ getHtml()
 
             ulList[i] = {
                 "title": $(this).find('div.blog-top a.blog-title').text().trim(),
+<<<<<<< HEAD
 
                 "description": $(this).find('div.blog-content').text().trim()+` ${date.slice(0,-6)}`,
 
+=======
+                "description": $(this).find('div.blog-content').text().trim()+"\\n"+date,
+>>>>>>> parent of 160ec15 (notice json change_ nextline date description)
                 "link": {"web": $(this).find('div.blog-top a').attr('href')},
                 "date": date,
                 // id: url.parse($(this).find('div.blog-top a').attr('href')).query.slice(2),
