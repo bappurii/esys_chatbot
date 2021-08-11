@@ -18,31 +18,49 @@ const cn = mysql.createConnection({
 
 
 router.post('/machine',(req,res)=>{
-    cn.query(`select * from prof where id=1 OR id=2 OR id=3`,(err, result)=>{
+    cn.query(`select * from prof where id=1`,(err, result)=>{
         if(err) console.log(err);
         let arr = [];
-        for(let i=0; i<result.length; i++){
-            arr[i]={
-                "title": result[i].name,
-                "description": result[i].lecture,
-                "thumbnail":{
-                    "imageUrl": result[i].image
-                },
-                "buttons": [
-                    {
-                        "action":  "webLink",
-                        "label": "자세한 프로필 링크",
-                        "webLinkUrl": result[i].profile
+        arr[i]={
+                    "title": result[0].name,
+                    "description": result[0].lecture,
+                    "thumbnail":{
+                        "imageUrl": result[0].image
                     },
-                    {
-                        "action":  "webLink",
-                        "label": "연구실 링크",
-                        "webLinkUrl": result[i].lab
-                    }
-                ]
-            }
-            console.log(arr[i].buttons);
-        }
+                    "buttons": [
+                        {
+                            "action":  "webLink",
+                            "label": "자세한 프로필 링크",
+                            "webLinkUrl": result[0].profile
+                        },
+                        {
+                            "action":  "webLink",
+                            "label": "연구실 링크",
+                            "webLinkUrl": result[0].lab
+                        }
+                    ]
+                }
+        // for(let i=0; i<result.length; i++){
+        //     arr[i]={
+        //         "title": result[i].name,
+        //         "description": result[i].lecture,
+        //         "thumbnail":{
+        //             "imageUrl": result[i].image
+        //         },
+        //         "buttons": [
+        //             {
+        //                 "action":  "webLink",
+        //                 "label": "자세한 프로필 링크",
+        //                 "webLinkUrl": result[i].profile
+        //             },
+        //             {
+        //                 "action":  "webLink",
+        //                 "label": "연구실 링크",
+        //                 "webLinkUrl": result[i].lab
+        //             }
+        //         ]
+        //     }
+        // }
         console.log(arr);
         const responseBody = {
             "version": "2.0",
