@@ -20,6 +20,26 @@ const cn = mysql.createConnection({
 router.post('/machine',(req,res)=>{
     cn.query(`select * from prof where id=1`,(err, result)=>{
         if(err) console.log(err);
+        const responseBody={
+            "version": "2.0",
+            "template": {
+                "outputs": [
+                    {
+                        "simpleText": {
+                            "text": result[0].lecture
+                        },
+                        "buttons": [
+                            {
+                                "action":  "webLink",
+                                "label": "자세한 프로필 링크",
+                                "webLinkUrl": result[0].profile
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+
         // let arr = [];
         // arr[0]={
         //             "title": result[0].name,
@@ -78,78 +98,79 @@ router.post('/machine',(req,res)=>{
         
         // res.status(200).send(responseBody);
         
-        let obj={
-                "title": result[0].name,
-                "description": result[0].lecture,
-                "thumbnail": {
-                "imageUrl": result[0].image
-                },
-                "buttons": [
-                {
-                    "action": "webLink",
-                    "label": "profile",
-                    "messageText": result[0].profile
-                },
-                {
-                    "action":  "webLink",
-                    "label": "lab",
-                    "webLinkUrl": result[0].lab
-                }
-                ]
-            }
-        const responseBody={
-            "version": "2.0",
-            "template": {
-                "outputs": [
-                    {
-                    "carousel": {
-                        "type": "basicCard",
-                        "items": [
-                        obj,
-                        {
-                            "title": "보물상자2",
-                            "description": "보물상자2 안에는 뭐가 있을까",
-                            "thumbnail": {
-                            "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg"
-                            },
-                            "buttons": [
-                            {
-                                "action": "message",
-                                "label": "열어보기",
-                                "messageText": "짜잔! 우리가 찾던 보물입니다"
-                            },
-                            {
-                                "action":  "webLink",
-                                "label": "구경하기",
-                                "webLinkUrl": "https://e.kakao.com/t/hello-ryan"
-                            }
-                            ]
-                        },
-                        {
-                            "title": "보물상자3",
-                            "description": "보물상자3 안에는 뭐가 있을까",
-                            "thumbnail": {
-                            "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg"
-                            },
-                            "buttons": [
-                            {
-                                "action": "message",
-                                "label": "열어보기",
-                                "messageText": "짜잔! 우리가 찾던 보물입니다"
-                            },
-                            {
-                                "action":  "webLink",
-                                "label": "구경하기",
-                                "webLinkUrl": "https://e.kakao.com/t/hello-ryan"
-                            }
-                            ]
-                        }
-                        ]
-                    }
-                    }
-                ]
-                }
-            }
+        // let obj={
+        //         "title": result[0].name,
+        //         "description": result[0].lecture,
+        //         "thumbnail": {
+        //         "imageUrl": result[0].image
+        //         },
+        //         "buttons": [
+        //         {
+        //             "action": "webLink",
+        //             "label": "profile",
+        //             "messageText": result[0].profile
+        //         },
+        //         {
+        //             "action":  "webLink",
+        //             "label": "lab",
+        //             "webLinkUrl": result[0].lab
+        //         }
+        //         ]
+        //     }
+        // console.log(obj);
+        // const responseBody={
+        //     "version": "2.0",
+        //     "template": {
+        //         "outputs": [
+        //             {
+        //             "carousel": {
+        //                 "type": "basicCard",
+        //                 "items": [
+        //                 obj,
+        //                 {
+        //                     "title": "보물상자2",
+        //                     "description": "보물상자2 안에는 뭐가 있을까",
+        //                     "thumbnail": {
+        //                     "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg"
+        //                     },
+        //                     "buttons": [
+        //                     {
+        //                         "action": "message",
+        //                         "label": "열어보기",
+        //                         "messageText": "짜잔! 우리가 찾던 보물입니다"
+        //                     },
+        //                     {
+        //                         "action":  "webLink",
+        //                         "label": "구경하기",
+        //                         "webLinkUrl": "https://e.kakao.com/t/hello-ryan"
+        //                     }
+        //                     ]
+        //                 },
+        //                 {
+        //                     "title": "보물상자3",
+        //                     "description": "보물상자3 안에는 뭐가 있을까",
+        //                     "thumbnail": {
+        //                     "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg"
+        //                     },
+        //                     "buttons": [
+        //                     {
+        //                         "action": "message",
+        //                         "label": "열어보기",
+        //                         "messageText": "짜잔! 우리가 찾던 보물입니다"
+        //                     },
+        //                     {
+        //                         "action":  "webLink",
+        //                         "label": "구경하기",
+        //                         "webLinkUrl": "https://e.kakao.com/t/hello-ryan"
+        //                     }
+        //                     ]
+        //                 }
+        //                 ]
+        //             }
+        //             }
+        //         ]
+        //         }
+        //     }
             res.status(200).send(responseBody);
 
     })
@@ -159,78 +180,25 @@ router.post('/machine',(req,res)=>{
 router.post('/electron',(req,res)=>{
     cn.query(`select * from prof where id=1`,(err, result)=>{
         if(err) console.log(err);
-        const obj = {
-            "title": "보물상자",
-            "description": "보물상자 안에는 뭐가 있을까",
-            "thumbnail": {
-                "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg"
-            },
-            "buttons": [
-                {
-                "action": "message",
-                "label": "열어보기",
-                "messageText": "짜잔! 우리가 찾던 보물입니다"
-                },
-                {
-                "action":  "webLink",
-                "label": "구경하기",
-                "webLinkUrl": "https://e.kakao.com/t/hello-ryan"
-                }
-            ]
-            }
-        const responseBody ={
+        const responseBody={
             "version": "2.0",
             "template": {
                 "outputs": [
-                {
-                    "carousel": {
-                    "type": "basicCard",
-                    "items": [
-                        obj,
-                        {
-                        "title": "보물상자2",
-                        "description": "보물상자2 안에는 뭐가 있을까",
-                        "thumbnail": {
-                            "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg"
+                    {
+                        "simpleText": {
+                            "text": "열유체역학, 계측공학"
                         },
                         "buttons": [
                             {
-                            "action": "message",
-                            "label": "열어보기",
-                            "messageText": "짜잔! 우리가 찾던 보물입니다"
-                            },
-                            {
-                            "action":  "webLink",
-                            "label": "구경하기",
-                            "webLinkUrl": "https://e.kakao.com/t/hello-ryan"
+                                "action":  "webLink",
+                                "label": "자세한 프로필 링크",
+                                "webLinkUrl":  "https://www.ecsl.cau.ac.kr/"
                             }
                         ]
-                        },
-                        {
-                        "title": "보물상자3",
-                        "description": "보물상자3 안에는 뭐가 있을까",
-                        "thumbnail": {
-                            "imageUrl": "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg"
-                        },
-                        "buttons": [
-                            {
-                            "action": "message",
-                            "label": "열어보기",
-                            "messageText": "짜잔! 우리가 찾던 보물입니다"
-                            },
-                            {
-                            "action":  "webLink",
-                            "label": "구경하기",
-                            "webLinkUrl": "https://e.kakao.com/t/hello-ryan"
-                            }
-                        ]
-                        }
-                    ]
                     }
-                }
                 ]
             }
-            }
+        }
             res.status(200).send(responseBody);
     })
 })
