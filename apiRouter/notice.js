@@ -24,22 +24,7 @@ const getHtml = async () => {
     }
 };
 
-router.post('/sayHello', function(req, res) {
-    const responseBody = {
-        version: "2.0",
-        template: {
-        outputs: [
-            {
-            simpleText: {
-                text: "hello I'm Ryan"
-            }
-            }
-        ]
-        }
-    };
-    
-    res.status(200).send(responseBody);
-    });
+
     
 getHtml()
     .then(html => {
@@ -52,27 +37,66 @@ getHtml()
             date = new Date(date);
 
             ulList[i] = {
-                title: $(this).find('div.blog-top a.blog-title').text().trim(),
-                url: $(this).find('div.blog-top a').attr('href'),
-                summary: $(this).find('div.blog-content').text().trim(),
+                "title": $(this).find('div.blog-top a.blog-title').text().trim(),
+                "description": $(this).find('div.blog-content').text().trim()+"\\n"+date,
+                "link": {"web": $(this).find('div.blog-top a').attr('href')},
                 "date": date,
-                id: url.parse($(this).find('div.blog-top a').attr('href')).query.slice(2),
+                // id: url.parse($(this).find('div.blog-top a').attr('href')).query.slice(2),
             };
     });
-    let wk_ago= new Date(Date.now() - 8 * 24 * 60 * 60 * 1000);
-    console.log(wk_ago);
+    let wk_ago= new Date(Date.now() - 10 * 24 * 60 * 60 * 1000);
     const liData = ulList.filter(n => n.date>=wk_ago);
-    console.log(liData);
     return liData;
 })
-.then(result => {
-    log(result)
-    router.get('/',(req,res)=>{
-        res.send(result)
+.then(liData => {
+    const filtered = liData.map(({date, ...rest})=>({...rest}))
+    console.log(filtered);
+    router.post('/',(req,res)=>{
+
+        
+        const responseBody = {
+            "version": "2.0",
+            "template": {
+                "outputs": [
+                {   
+                    "listCard": {
+                    "header": {
+                        "title": "최근 공지사항"
+                    },
+                    "items": [
+                        filtered
+                    ],
+                    "buttons": [
+                        {
+                        "label": "전체 글 보기",
+                        "action": "webLink",
+                        "webLinkUrl": "http://ese.cau.ac.kr/wordpress/?page_id=226"
+                        }
+                    ]
+                    }
+                }
+                ]
+            }
+            }
+    
+        res.status(200).send(responseBody);
     })
 });
 
-
+router.post('/sayHello', function(req, res) {
+    const responseBody = {
+        version: "2.0",
+        template: {
+        outputs: [
+            {
+            
+            }
+        ]
+        }
+    };
+    
+    res.status(200).send(responseBody);
+    });
 
 router.post('/showHello', function(req, res) {
     console.log(req.body);
