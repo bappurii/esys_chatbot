@@ -84,18 +84,18 @@ const cn = mysql.createConnection({
                 "thumbnail": {
                 "imageUrl": result[0].image
                 },
-                "buttons": [
-                {
-                    "action": "webLink",
-                    "label": "profile",
-                    "messageText": result[0].profile
-                },
-                {
-                    "action":  "webLink",
-                    "label": "lab",
-                    "webLinkUrl": result[0].lab
-                }
-                ]
+                // "buttons": [
+                // {
+                //     "action": "webLink",
+                //     "label": "profile",
+                //     "messageText": result[0].profile
+                // },
+                // {
+                //     "action":  "webLink",
+                //     "label": "lab",
+                //     "webLinkUrl": result[0].lab
+                // }
+                // ]
             }
         const responseBody={
             "version": "2.0",
