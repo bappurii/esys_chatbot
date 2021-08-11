@@ -105,7 +105,7 @@ router.post('/machine',(req,res)=>{
                     "carousel": {
                         "type": "basicCard",
                         "items": [
-                        // obj,
+                        
                         {
                             "title": "보물상자2",
                             "description": "보물상자2 안에는 뭐가 있을까",
