@@ -16,9 +16,9 @@ const cn = mysql.createConnection({
     database : 'esys_mailer'
 });
 
+cn.query(`select * from prof where id=1`,(err, result)=>{
+    router.post('/machine',(req,res)=>{
 
-router.post('/machine',(req,res)=>{
-    cn.query(`select * from prof where id=1`,(err, result)=>{
         if(err) console.log(err);
         // let arr = [];
         // arr[0]={
