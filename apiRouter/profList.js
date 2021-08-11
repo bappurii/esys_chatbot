@@ -17,7 +17,7 @@ const cn = mysql.createConnection({
 });
 
 
-router.post('/기계',(req,res)=>{
+router.post('/machine',(req,res)=>{
     cn.query(`select * from prof`,(err, result)=>{
         if(err) console.log(err);
         let arr = [];
@@ -27,21 +27,22 @@ router.post('/기계',(req,res)=>{
                 "description": result[i].depart,
                 "thumbnail":{
                     "imageUrl": result[i].image
-                }//,
-                // "buttons": [
-                //     {
-                //         "action":  "webLink",
-                //         "label": "자세한 프로필 링크",
-                //         "webLinkUrl": result[i].profile
-                //     },
-                //     {
-                //         "action":  "webLink",
-                //         "label": "연구실 링크",
-                //         "webLinkUrl": result[i].lab
-                //     }
-                // ]
+                },
+                "buttons": [
+                    {
+                        "action":  "webLink",
+                        "label": "자세한 프로필 링크",
+                        "webLinkUrl": result[i].profile
+                    },
+                    {
+                        "action":  "webLink",
+                        "label": "연구실 링크",
+                        "webLinkUrl": result[i].lab
+                    }
+                ]
             }
         }
+        console.log(arr);
         const responseBody = {
             "version": "2.0",
             "template": {
