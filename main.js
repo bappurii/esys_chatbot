@@ -29,6 +29,6 @@ const cn = mysql.createConnection({
 
 
 app.use('/notice', notice);
-app.use('/profList', profList);
+// app.use('/profList', profList);
 
 app.listen(PORT);

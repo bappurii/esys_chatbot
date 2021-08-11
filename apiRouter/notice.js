@@ -49,7 +49,7 @@ getHtml()
     const filtered = liData.map(({date, ...rest})=>({...rest}))
     router.post('/',(req,res)=>{
 
-        
+        console.log(filtered);
         const responseBody = {
             "version": "2.0",
             "template": {
