@@ -41,6 +41,7 @@ router.post('/machine',(req,res)=>{
                     }
                 ]
             }
+            console.log(arr[i].buttons);
         }
         console.log(arr);
         const responseBody = {
@@ -56,6 +57,7 @@ router.post('/machine',(req,res)=>{
                 ]
             }
         }
+        console.log(responseBody);
         res.status(200).send(responseBody);
     })
 
