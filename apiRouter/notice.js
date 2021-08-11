@@ -60,19 +60,19 @@ getHtml()
                 "outputs": [
                 {   
                     "listCard": {
-                    "header": {
-                        "title": "최근 공지사항"
-                    },
-                    "items": [
-                        filtered
-                    ],
-                    "buttons": [
-                        {
-                        "label": "전체 글 보기",
-                        "action": "webLink",
-                        "webLinkUrl": "http://ese.cau.ac.kr/wordpress/?page_id=226"
-                        }
-                    ]
+                        "header": {
+                            "title": "최근 공지사항"
+                        },
+                        "items": 
+                            filtered
+                        ,
+                        "buttons": [
+                            {
+                            "label": "전체 글 보기",
+                            "action": "webLink",
+                            "webLinkUrl": "http://ese.cau.ac.kr/wordpress/?page_id=226"
+                            }
+                        ]
                     }
                 }
                 ]
