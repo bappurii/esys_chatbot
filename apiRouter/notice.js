@@ -34,14 +34,12 @@ getHtml()
 
         $bodyList.each(function(i, elem) {
             let date = $(this).find('div.blog-details span').text().substr(0, $(this).find('div.blog-details span').text().length-10);
-            date = new Date(date);
-
+            new_date = new Date(date);
             ulList[i] = {
                 "title": $(this).find('div.blog-top a.blog-title').text().trim(),
                 "description": $(this).find('div.blog-content').text().trim()+` ${date.slice(0,-6)}`,
                 "link": {"web": $(this).find('div.blog-top a').attr('href')},
-                "date": date,
-                // id: url.parse($(this).find('div.blog-top a').attr('href')).query.slice(2),
+                "date": new_date,
             };
     });
     let wk_ago= new Date(Date.now() - 10 * 24 * 60 * 60 * 1000);
