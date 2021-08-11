@@ -258,7 +258,7 @@ router.post('/nuclear',(req, res)=>{
                         {
                         "action":  "webLink",
                         "label": "구경하기",
-                        "webLinkUrl": " https://www.ecsl.cau.ac.kr/"
+                        "webLinkUrl": "https://www.ecsl.cau.ac.kr/"
                         }
                     ]
                     },
